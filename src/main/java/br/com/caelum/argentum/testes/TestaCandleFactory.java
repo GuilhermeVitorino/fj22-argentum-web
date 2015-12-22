@@ -6,11 +6,11 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import br.com.caelum.argentum.modelo.CandleBuilder;
-import br.com.caelum.argentum.modelo.Candlestick;
-import br.com.caelum.argentum.modelo.CandlestickFactory;
+import br.com.caelum.argentum.modelo.Candle;
+import br.com.caelum.argentum.modelo.CandleFactory;
 import br.com.caelum.argentum.modelo.Negociacao;
 
-public class TestaCandlestickFactory {
+public class TestaCandleFactory {
 
 	public static void main(String[] args) {
 		Calendar hoje = Calendar.getInstance();
@@ -28,8 +28,8 @@ public class TestaCandlestickFactory {
 		List<Negociacao> negociacoes = Arrays.asList(negociacao1, negociacao2,
 							negociacao3, negociacao4);
 		
-		CandlestickFactory fabrica = new CandlestickFactory();
-		Candlestick candle = fabrica.constroiCandleParaData(
+		CandleFactory fabrica = new CandleFactory();
+		Candle candle = fabrica.constroiCandleParaData(
 												hoje, negociacoes);
 		
 		System.out.println(candle.getAbertura());
@@ -41,7 +41,7 @@ public class TestaCandlestickFactory {
 		System.out.println(candle.toString());
 		
 		//Gerando o Candle pelo CandleBuilder
-		Candlestick candle2 = new CandleBuilder().comAbertura(40.5)
+		Candle candle2 = new CandleBuilder().comAbertura(40.5)
 				.comFechamento(42.3).comMinimo(39.8).comMaximo(45.0)
 				.comVolume(145234.20).comData(
 				new GregorianCalendar(2008, 8, 12, 0, 0, 0)).geraCandle();

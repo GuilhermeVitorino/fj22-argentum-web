@@ -41,8 +41,8 @@ public class CandleBuilder {
 		return this;
 	}
 
-	public Candlestick geraCandle() {
-		return new Candlestick(abertura, fechamento, minimo, maximo,
+	public Candle geraCandle() {
+		return new Candle(abertura, fechamento, minimo, maximo,
 						volume, data);
 	}
 }

@@ -6,10 +6,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class CandlestickFactory {
+public class CandleFactory {
 	
 	// ctrl + 1 para adicionar o return automaticamente
-	public Candlestick constroiCandleParaData(Calendar data,
+	public Candle constroiCandleParaData(Calendar data,
 										List<Negociacao> negociacoes) {
 		//double maximo = negociacoes.get(0).getPreco();
 		//double minimo = negociacoes.get(0).getPreco();
@@ -23,12 +23,13 @@ public class CandlestickFactory {
 		for (Negociacao negociacao : negociacoes) {
 			volume += negociacao.getVolume();
 		
-			if (negociacao.getPreco() > maximo) {
-				maximo = negociacao.getPreco();
+			double preco = negociacao.getPreco();
+			if (preco > maximo) {
+				maximo = preco;
 			}
 			
-			if (negociacao.getPreco() < minimo) {
-				minimo = negociacao.getPreco();
+			if (preco < minimo) {
+				minimo = preco;
 			}
 		}
 		
@@ -40,12 +41,12 @@ public class CandlestickFactory {
 		//double abertura = negociacoes.get(0).getPreco();
 		//double fechamento = negociacoes.get(negociacoes.size()-1).getPreco();
 		System.out.println(minimo);
-		return new Candlestick(abertura, fechamento, minimo, maximo,
+		return new Candle(abertura, fechamento, minimo, maximo,
 														volume, data);
 				
 	}
 
-	public List<Candlestick> constroiCandles(List<Negociacao> todasNegociacoes) {
+	public List<Candle> constroiCandles(List<Negociacao> todasNegociacoes) {
 		
 		Collections.sort(todasNegociacoes,
 				new Comparator<Negociacao>() {
@@ -55,7 +56,7 @@ public class CandlestickFactory {
 					}
 		}); //Ordenar negociações!!!
 		
-		List<Candlestick> candles = new ArrayList<Candlestick>();
+		List<Candle> candles = new ArrayList<Candle>();
 		List<Negociacao> negociacoesDoDia = new ArrayList<Negociacao>();
 		
 		Calendar dataAtual = todasNegociacoes.get(0).getData();
@@ -63,9 +64,7 @@ public class CandlestickFactory {
 		for (Negociacao negociacao : todasNegociacoes) {
 			// se não for mesmo dia, fecha candle e reinicia variáveis
 			if (!negociacao.isMesmoDia(dataAtual)) {
-				Candlestick candleDoDia = constroiCandleParaData(dataAtual,
-				negociacoesDoDia);
-				candles.add(candleDoDia);
+				criaEGuardaCandle(candles, negociacoesDoDia, dataAtual);
 				negociacoesDoDia = new ArrayList<Negociacao>();
 				dataAtual = negociacao.getData();
 			}
@@ -75,10 +74,7 @@ public class CandlestickFactory {
 		dataAtual = todasNegociacoes.get(0).getData();
 		
 		// adiciona último candle
-		Candlestick candleDoDia = constroiCandleParaData(dataAtual,
-		negociacoesDoDia);
-		
-		candles.add(candleDoDia);
+		criaEGuardaCandle(candles, negociacoesDoDia, dataAtual);
 		
 		for (Negociacao negociacao : todasNegociacoes) {
 			System.err.println(negociacao.getData().getTime());
@@ -95,5 +91,12 @@ public class CandlestickFactory {
 		}
 		
 		return candles;
+	}
+
+	private void criaEGuardaCandle(List<Candle> candles,
+			List<Negociacao> negociacoesDoDia, Calendar dataAtual) {
+		Candle candleDoDia = constroiCandleParaData(dataAtual,
+		negociacoesDoDia);
+		candles.add(candleDoDia);
 	}
 }

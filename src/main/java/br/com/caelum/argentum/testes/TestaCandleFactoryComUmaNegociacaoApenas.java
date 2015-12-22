@@ -6,20 +6,20 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import br.com.caelum.argentum.modelo.CandleBuilder;
-import br.com.caelum.argentum.modelo.Candlestick;
-import br.com.caelum.argentum.modelo.CandlestickFactory;
+import br.com.caelum.argentum.modelo.Candle;
+import br.com.caelum.argentum.modelo.CandleFactory;
 import br.com.caelum.argentum.modelo.Negociacao;
 
-public class TestaCandlestickFactoryComUmaNegociacaoApenas {
+public class TestaCandleFactoryComUmaNegociacaoApenas {
 
 	public static void main(String[] args) {
 		
 		Calendar hoje = Calendar.getInstance();
 		Negociacao negociacao1 = new Negociacao(40.5, 100, hoje);
 		List<Negociacao> negociacoes = Arrays.asList(negociacao1);
-		CandlestickFactory fabrica = new CandlestickFactory();
+		CandleFactory fabrica = new CandleFactory();
 		
-		Candlestick candle = fabrica.constroiCandleParaData(hoje, negociacoes);
+		Candle candle = fabrica.constroiCandleParaData(hoje, negociacoes);
 		System.out.println(candle.getAbertura());
 		System.out.println(candle.getFechamento());
 		System.out.println(candle.getMinimo());
