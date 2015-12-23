@@ -9,18 +9,19 @@ xmlns:p="http://primefaces.org/ui">
 		<title>Argentum</title>
 	</h:head>
 	<h:body>
+		<p:chart type="line" model="#{argentumBean.modeloGrafico}" />
 		<h:form>
 			<p:dataTable var="negociacao" value="#{argentumBean.negociacoes}" paginator="true" rows="15">
-				<p:column sortBy="#{negociacao.preco}" headerText="Preço">
-					<h:outputText value="#{negociacao.preco}"/>
+				<p:column sortBy="#{negociacao.preco}" headerText="Preço" style="text-align: right">
+					<h:outputText value="R$ #{negociacao.preco}"/>
 				</p:column>
-				<p:column headerText="Quantidade">
+				<p:column headerText="Quantidade" style="text-align: center">
 					<h:outputText value="#{negociacao.quantidade}"/>
 				</p:column>
 				<p:column headerText="Volume">
 					<h:outputText value="#{negociacao.volume}"/>
 				</p:column>
-				<p:column headerText="Data">
+				<p:column headerText="Data" style="text-align: center">
 					<h:outputText value="#{negociacao.data.time}">
 						<f:convertDateTime pattern="dd/MM/yyyy"/>
 					</h:outputText>	
