@@ -28,6 +28,7 @@ public class ArgentumBean {
 	private ChartModel modeloGrafico;
 	private String nomeMedia;
 	private String nomeIndicadorBase;
+	private String titulo;
 	
 	public ArgentumBean() {
 		System.out.println("Obtendo negociacoes do WebService...");
@@ -41,7 +42,7 @@ public class ArgentumBean {
 		List<Candle> candles = new CandleFactory().constroiCandles(negociacoes);
 		SerieTemporal serie = new SerieTemporal(candles);
 		GeradorModeloGrafico geradorGrafico =
-				new GeradorModeloGrafico(serie, 2, serie.getUltimaPosicao());
+				new GeradorModeloGrafico(serie, 2, serie.getUltimaPosicao(), titulo);
 		geradorGrafico.plotaIndicador((Indicador) 
 				new IndicadorFactory(nomeMedia, nomeIndicadorBase).defineIndicador());
 		this.setModeloGrafico(geradorGrafico.getModeloGrafico());
@@ -75,6 +76,14 @@ public class ArgentumBean {
 
 	public void setNomeIndicadorBase(String nomeIndicadorBase) {
 		this.nomeIndicadorBase = nomeIndicadorBase;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 }

@@ -10,6 +10,9 @@ xmlns:p="http://primefaces.org/ui">
 	</h:head>
 	<h:body>
 		<h:form>
+			<p:messages autoUpdate="true"/>
+			<h:outputLabel value="Título Gráfico: "/>
+			<p:inputText id="titulo" value="#{argentumBean.titulo}" required="true"/>
 			<h:panelGrid columns="5">
 				<h:outputLabel value="Media Móvel: "/>
 				<p:selectOneButton value="#{argentumBean.nomeMedia}">
