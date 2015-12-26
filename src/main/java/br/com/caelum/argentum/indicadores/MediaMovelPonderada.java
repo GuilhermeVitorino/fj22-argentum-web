@@ -25,6 +25,6 @@ public class MediaMovelPonderada implements Indicador {
 	}
 	
 	public String toString() {
-		return "MMP";
+		return "MMP" + " de " + outroIndicador.toString();
 	}
 }

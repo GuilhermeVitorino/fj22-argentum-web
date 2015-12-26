@@ -43,7 +43,7 @@ public class ArgentumBean {
 		GeradorModeloGrafico geradorGrafico =
 				new GeradorModeloGrafico(serie, 2, serie.getUltimaPosicao());
 		geradorGrafico.plotaIndicador((Indicador) 
-				new IndicadorFactory(nomeMedia, nomeIndicadorBase));
+				new IndicadorFactory(nomeMedia, nomeIndicadorBase).defineIndicador());
 		this.setModeloGrafico(geradorGrafico.getModeloGrafico());
 	}
 

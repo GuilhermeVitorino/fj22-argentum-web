@@ -10,10 +10,9 @@ public class IndicadorFactory {
 	public IndicadorFactory(String nomeMedia, String nomeIndicadorBase) {
 		this.nomeMedia = nomeMedia;
 		this.nomeIndicadorBase = nomeIndicadorBase;
-		defineIndicador();
 	}
 
-	private Indicador defineIndicador() {
+	public Indicador defineIndicador() {
 		
 		if (nomeIndicadorBase == null || nomeMedia == null)
 			return new MediaMovelSimples(new IndicadorFechamento());
