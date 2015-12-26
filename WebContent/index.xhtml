@@ -22,7 +22,7 @@ xmlns:p="http://primefaces.org/ui">
 					<f:selectItem itemLabel="Fechamento" itemValue="IndicadorFechamento" />
 				</p:selectOneButton>
 				<p:commandButton value="Gerar gráfico" update=":grafico"
-				action="#{argentumBean.gerarGrafico}"/>
+				action="#{argentumBean.geraGrafico}"/>
 			</h:panelGrid>
 		</h:form>
 		<p:chart type="line" model="#{argentumBean.modeloGrafico}" id="grafico" />

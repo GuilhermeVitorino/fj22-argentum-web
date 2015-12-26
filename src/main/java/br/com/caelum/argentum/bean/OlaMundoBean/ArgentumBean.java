@@ -11,6 +11,7 @@ import org.primefaces.model.chart.ChartModel;
 import br.com.caelum.argentum.grafico.GeradorModeloGrafico;
 import br.com.caelum.argentum.indicadores.Indicador;
 import br.com.caelum.argentum.indicadores.IndicadorAbertura;
+import br.com.caelum.argentum.indicadores.IndicadorFactory;
 import br.com.caelum.argentum.indicadores.IndicadorFechamento;
 import br.com.caelum.argentum.indicadores.MediaMovelSimples;
 import br.com.caelum.argentum.modelo.Candle;
@@ -41,33 +42,12 @@ public class ArgentumBean {
 		SerieTemporal serie = new SerieTemporal(candles);
 		GeradorModeloGrafico geradorGrafico =
 				new GeradorModeloGrafico(serie, 2, serie.getUltimaPosicao());
-		//defineIndicador(geradorGrafico);
-		geradorGrafico.plotaIndicador(defineIndicador(geradorGrafico));
+		geradorGrafico.plotaIndicador((Indicador) 
+				new IndicadorFactory(nomeMedia, nomeIndicadorBase));
 		this.setModeloGrafico(geradorGrafico.getModeloGrafico());
 	}
 
-	private Indicador defineIndicador(GeradorModeloGrafico geradorGrafico) {
-		
-		if (nomeIndicadorBase == null || nomeMedia == null)
-			return new MediaMovelSimples(new IndicadorFechamento());
-		
-		try {
-			
-			String pacote = "br.com.caelum.argentum.indicadores.";
-			
-			Class<?> classeIndicadorBase = Class.forName(pacote + nomeIndicadorBase);
-			Indicador indicadorBase = (Indicador) classeIndicadorBase.newInstance();
-			
-			Class<?> classeMedia = Class.forName(pacote + nomeMedia);
-			Constructor<?> construtorMedia = classeMedia.getConstructor(Indicador.class);
-			
-			Indicador indicador = (Indicador) construtorMedia.newInstance(indicadorBase);
-			return indicador;
-
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
+	
 
 	public List<Negociacao> getNegociacoes() {
 		return negociacoes;

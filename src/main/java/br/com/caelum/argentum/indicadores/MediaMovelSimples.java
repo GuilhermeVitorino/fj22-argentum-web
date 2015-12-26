@@ -23,6 +23,6 @@ public class MediaMovelSimples implements Indicador {
 	}
 	
 	public String toString() {
-		return "MMS de Fechamento";
+		return "MMS";
 	}
 }
