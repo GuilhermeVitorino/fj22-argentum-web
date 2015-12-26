@@ -40,7 +40,7 @@ public class CandleFactory {
 			minimo=0;
 		//double abertura = negociacoes.get(0).getPreco();
 		//double fechamento = negociacoes.get(negociacoes.size()-1).getPreco();
-		System.out.println(minimo);
+		//System.out.println(minimo);
 		return new Candle(abertura, fechamento, minimo, maximo,
 														volume, data);
 				
@@ -76,9 +76,9 @@ public class CandleFactory {
 		// adiciona último candle
 		criaEGuardaCandle(candles, negociacoesDoDia, dataAtual);
 		
-		for (Negociacao negociacao : todasNegociacoes) {
+		/*for (Negociacao negociacao : todasNegociacoes) {
 			System.err.println(negociacao.getData().getTime());
-		}
+		}*/
 		
 		for (Negociacao negociacao : todasNegociacoes) {
 			
